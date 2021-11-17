@@ -1,0 +1,191 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pupil Asset User API",
+        "description": "Pupil Asset User API",
+        "contact": {
+            "email": "nathan.daly@junipereducation.org"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/users/verify": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Verify a users existence",
+                "description": "Verify a user exists and the credentials match.",
+                "operationId": "verifyUser",
+                "requestBody": {
+                    "description": "Verify user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DirectoryUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{email}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get user name and nick from the identifier.",
+                "description": "Returns a JSON object that has the full name and nickname of the user requested.",
+                "operationId": "getUserByIdentifier",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "primary email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BasicUser"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "api/v1/users/{email}/accessControl/{organisationId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Check if identifier has access to an organisation.",
+                "description": "Returns a JSON object with confirmation of user access to an organisation and claims.",
+                "operationId": "accessControl",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "primary email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "organisationId",
+                        "in": "path",
+                        "description": "organisation ID",
+                        "required": false,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserAccessResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BasicUser": {
+                "description": "Class BasicUser",
+                "properties": {
+                    "fullName": {
+                        "description": "User fullname",
+                        "type": "string"
+                    },
+                    "nickName": {
+                        "description": "User nickname",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserAccessResource": {
+                "title": "UserAccess",
+                "description": "Class UserAccessResource",
+                "properties": {
+                    "hasAccess": {
+                        "type": "boolean"
+                    },
+                    "isEnabled": {
+                        "type": "boolean"
+                    },
+                    "productSpecificClaimsNamespace": {
+                        "type": "string"
+                    },
+                    "productSpecificClaims": {
+                        "properties": {
+                            "additionalProperty1": {
+                                "type": "string"
+                            },
+                            "additionalProperty2": {
+                                "type": "string"
+                            },
+                            "additionalProperty3": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "DirectoryUser": {
+                "title": "DirectoryUser",
+                "description": "Directory User model used for initial authentication and database context switching",
+                "properties": {
+                    "username": {
+                        "schema": "DirectoryUser",
+                        "description": "username",
+                        "type": "string"
+                    },
+                    "password": {
+                        "schema": "DirectoryUser",
+                        "description": "password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

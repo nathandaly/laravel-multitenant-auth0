@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "ff52a278-ccf3-4a8e-bce9-1c7e8819a9f0",
+		"name": "Example User API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/v1/Users",
+			"item": [
+				{
+					"name": "{email}",
+					"item": [
+						{
+							"name": "/api/v1/Users/:email",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/users/nathan.daly@junipereducation.org ",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"nathan.daly@junipereducation.org "
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Users/:email",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Users",
+												":email"
+											],
+											"variable": [
+												{
+													"key": "email"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"fullName\": \"velit Du\",\n \"nickname\": \"commodo ea\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Users/:email/accessControl/:organisationId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Users/:email/accessControl/:organisationId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Users",
+										":email",
+										"accessControl",
+										":organisationId"
+									],
+									"variable": [
+										{
+											"key": "email",
+											"value": "exercitation dolor voluptate",
+											"description": "(Required) "
+										},
+										{
+											"key": "organisationId",
+											"value": "nostrud aliquip",
+											"description": "Must check \"Send empty value\" or Swagger passes a comma for empty values otherwise"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Users/:email/accessControl/:organisationId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Users",
+												":email",
+												"accessControl",
+												":organisationId"
+											],
+											"variable": [
+												{
+													"key": "email"
+												},
+												{
+													"key": "organisationId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"hasAccess\": false,\n \"isEnabled\": false,\n \"productSpecificClaimsNamespace\": \"Ut\",\n \"productSpecificClaims\": {}\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/api/v1/Users/verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"nathan.daly@junipereducation.org\",\n    \"password\": \"somesupersecretpassword\"\n    \n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/users/verify",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"verify"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"consequat magna \",\n    \"username\": \"eiusmod irure\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Users/verify",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Users",
+										"verify"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"credentialsValid\": true\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}
